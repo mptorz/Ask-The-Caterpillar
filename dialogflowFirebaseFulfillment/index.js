@@ -30,7 +30,7 @@ function processV1Request (request, response) {
         'input.unknown': () => {
             apiHandler(userQuery).then((output) => {
             
-                if (output.substring(0, 32) === "I could tell you want info about") {
+                if (output.includes("ask")) {
                     app.ask(output);
                 }else{
                     app.tell(output);  
