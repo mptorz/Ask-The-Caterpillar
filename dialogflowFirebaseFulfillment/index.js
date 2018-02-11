@@ -24,18 +24,16 @@ function processV1Request (request, response) {
     const app = new DialogflowApp({request: request, response: response});
     const actionHandlers = {
         'input.welcome': () => {
-            sendGoogleResponse(introduction);
+            app.ask(introduction);
             sendResponse(introduction);
         },
         'input.unknown': () => {
             apiHandler(userQuery).then((output) => {
-            
                 if (output.includes("ask")) {
                     app.ask(output);
                 }else{
                     app.tell(output);  
-                }
-                
+                }      
                 sendResponse(output);
             }).catch((error) => {
                 app.tell("There was an error. sorry " + error);
@@ -48,17 +46,6 @@ function processV1Request (request, response) {
     }
     actionHandlers[action]();
 
-    function sendGoogleResponse (responseToUser) {
-        if (typeof responseToUser === 'string') {
-            app.ask(responseToUser);
-        } else {
-            let googleResponse = app.buildRichResponse().addSimpleResponse({
-                speech: responseToUser.speech || responseToUser.displayText,
-                displayText: responseToUser.displayText || responseToUser.speech
-            });
-            app.ask(googleResponse);
-        }
-    }
     function sendResponse (responseToUser) {
         if (typeof responseToUser === 'string') {
             let responseJson = {};
