@@ -29,7 +29,13 @@ function processV1Request (request, response) {
         },
         'input.unknown': () => {
             apiHandler(userQuery).then((output) => {
-                app.tell(output);
+            
+                if (output.substring(0, 32) === "I could tell you want info about") {
+                    app.ask(output);
+                }else{
+                    app.tell(output);  
+                }
+                
                 sendResponse(output);
             }).catch((error) => {
                 app.tell("There was an error. sorry " + error);
