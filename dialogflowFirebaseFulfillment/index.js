@@ -3,6 +3,8 @@
 const functions = require('firebase-functions');
 const DialogflowApp = require('actions-on-google').DialogflowApp;
 const request = require('request');
+const introduction = 'Hello I am a harm reduction assistant. Ask me questions about drugs!'
+
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
     console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
@@ -22,15 +24,21 @@ function processV1Request (request, response) {
     const app = new DialogflowApp({request: request, response: response});
     const actionHandlers = {
         'input.welcome': () => {
-            sendGoogleResponse('Hello, Ask me questions about drugs!');
-            sendResponse('Hello, Ask me questions about drugs!');
+            sendGoogleResponse(introduction);
+            sendResponse(introduction);
         },
         'input.unknown': () => {
             apiHandler(userQuery).then((output) => {
-                sendGoogleResponse(output);
+            
+                if (output.includes("ask")) {
+                    app.ask(output);
+                }else{
+                    app.tell(output);  
+                }
+                
                 sendResponse(output);
             }).catch((error) => {
-                sendGoogleResponse("There was an error. sorry " + error);
+                app.tell("There was an error. sorry " + error);
                 sendResponse("There was an error. sorry " + error);
             });
         }
@@ -72,7 +80,7 @@ function processV2Request (request, response) {
     let userQuery = request.body.queryResult.queryText;
     const actionHandlers = {
         'input.welcome': () => {
-            sendResponse('Hello, Ask me questions about drugs!');
+            sendResponse(introduction);
         },
         'input.unknown': () => {
             apiHandler(userQuery).then((output) => {
