@@ -3,7 +3,7 @@
 const functions = require('firebase-functions');
 const DialogflowApp = require('actions-on-google').DialogflowApp;
 const request = require('request');
-const introduction = 'Hello I am a harm reduction assistant. Ask me questions about drugs!'
+const introduction = 'Hello, I am a harm reduction assistant. Disclaimer: The information provided by the app is not a substitute for advice from a medical professional. The content of the app may be inappropriete for general audience. If you want to continue, ask me questions about drugs! '
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
@@ -31,6 +31,11 @@ function processV1Request (request, response) {
             apiHandler(userQuery).then((output) => {
                 if (output.includes("ask")) {
                     app.ask(output);
+                }else if (output.includes("Sorry, but I couldn't determine what substance you were inquiring about") 
+                || output.includes("Sorry, I know you want to know about mixing something with")) {
+                    app.ask(output + " Please ask again or say quit.")
+                }else if (userQuery.trim() === '') {
+                    app.ask("Sorry, I didn't catch anything. Please ask a question or say quit.")
                 }else{
                     app.tell(output);  
                 }      
