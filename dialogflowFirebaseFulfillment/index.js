@@ -27,7 +27,7 @@ function processRequest (request, response) {
         console.log('welcome check');
         let realQuery = request.body.originalRequest.data.inputs[0].rawInputs[0].query;
         console.log('realQuery ' + realQuery);
-        let index = realQuery.indexOf("caterpillar");
+        let index = realQuery.toLowerCase().indexOf("caterpillar");
         console.log('index: ' + index);
         let userQueryTail = (index === -1) ? '' : realQuery.slice(index+11);
         console.log('userQueryTail: ' + userQueryTail);
