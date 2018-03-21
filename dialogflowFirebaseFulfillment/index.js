@@ -17,8 +17,27 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
 function processRequest (request, response) {
     let action = request.body.result.action;
+    console.log('action' + action);
     const app = new DialogflowApp({request: request, response: response});
-    let userQuery = app.getRawInput();
+    let userQuery =  app.getRawInput();
+    console.log('userQuery: ' + userQuery);
+    
+    // This is for deep link invocations
+    if (action === 'input.welcome') {
+        console.log('welcome check');
+        let realQuery = request.body.originalRequest.data.inputs[0].rawInputs[0].query;
+        console.log('realQuery ' + realQuery);
+        let index = realQuery.indexOf("caterpillar");
+        console.log('index: ' + index);
+        let userQueryTail = (index === -1) ? '' : realQuery.slice(index+11);
+        console.log('userQueryTail: ' + userQueryTail);
+        if (!/^\s*$/.test(userQueryTail)) {
+            action = 'input.unknown';
+            console.log('action:  ' + action);
+            userQuery = userQueryTail;
+            console.log('userQuery: ' + userQuery);
+        }
+    }
     const actionHandlers = {
         'input.welcome': () => {
             let response = 'Hello, I am a harm reduction assistant. Disclaimer: The information provided by the app' +
