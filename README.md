@@ -3,7 +3,7 @@ I implemented new channels to the Ask The Caterpillar project. Using DialogFlow 
 
 Links:
 
-Google Assistant app:
+Google Assistant app:  
 [MY Google Assistant app in the Google Directory](https://assistant.google.com/services/a/uid/0000004e25d7c395) 
 
 Discord bot:  
