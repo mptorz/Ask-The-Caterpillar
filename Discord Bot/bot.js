@@ -12,7 +12,11 @@ client.on("message", (message) => {
         apiHandler(userQuery.substr(11)).then((response) => {
             message.channel.send(response);
         });
-    } else if (message.channel.type === "dm" && !message.author.bot) {
+    } else if (userQuery.startsWith("ctp") && !message.author.bot) {
+        apiHandler(userQuery.substr(3)).then((response) => {
+            message.channel.send(response);
+        });
+    }else if (message.channel.type === "dm" && !message.author.bot) {
         apiHandler(userQuery).then((response) => {
             message.channel.send(response);
         });

@@ -1,14 +1,14 @@
 {
-  "name": "catetrdisc",
+  "name": "askthecaterpillardiscord",
   "version": "1.0.0",
-  "description": "",
+  "description": "A discord bot that uses Ask The Caterpillar API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Mikolaj Torz",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^11.3.2",
     "request": "^2.85.0"
