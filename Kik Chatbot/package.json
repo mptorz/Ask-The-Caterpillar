@@ -1,0 +1,18 @@
+{
+  "name": "ask-the-caterpillar-kik",
+  "version": "1.0.0",
+  "description": "A harm reduction assistant",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Mikolaj Torz",
+  "license": "MIT",
+  "dependencies": {
+    "@kikinteractive/kik": "^2.0.0",
+    "express": "^4.13.4",
+    "getenv": "^0.6.0",
+    "request": "^2.70.0"
+  }
+}
