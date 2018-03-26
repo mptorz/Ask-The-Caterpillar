@@ -10,8 +10,8 @@ const app = express();
 
 const bot = new Bot({
 	username: 'askcaterpillar',
-	apiKey: '6ccfabb4-6f1b-4e51-a3bf-1b85ccf83058',
-	baseUrl: 'https://kikcaterpillar.herokuapp.com/incoming'
+	apiKey: 'MYSECRETAPIKEY',
+	baseUrl: 'WEBHOOK_IP'
 });
 
 bot.updateBotConfiguration();
