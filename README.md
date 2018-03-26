@@ -9,5 +9,11 @@ Google Assistant app:
 Discord bot:  
 https://discordapp.com/oauth2/authorize?client_id=427214426786234399&scope=bot  
 
+Skype:  
+https://join.skype.com/bot/33e59403-2656-4b55-90b4-d0fa5b8810da
+
+KIK:  
+@askcaterpillar
+
 [The repository of the original project](https://github.com/estiens/caterpillar_rails)  
 [Ask The Caterpillar Website](http://askthecaterpillar.com/)  
