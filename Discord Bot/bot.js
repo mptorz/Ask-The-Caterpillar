@@ -9,11 +9,13 @@ client.on("ready", () => {
 client.on("message", (message) => {
     let userQuery = message.content;
     if (userQuery.startsWith("caterpillar") && !message.author.bot) {
-        apiHandler(userQuery.substr(11)).then((response) => {
+        let query = (/^\s*$/.test(userQuery.substr(11))) ? "Hi" : userQuery.substr(11);
+        apiHandler(query).then((response) => {
             message.channel.send(response);
         });
     } else if (userQuery.startsWith("ctp") && !message.author.bot) {
-        apiHandler(userQuery.substr(3)).then((response) => {
+        let query = (/^\s*$/.test(userQuery.substr(3))) ? "Hi" : userQuery.substr(3);
+        apiHandler(query).then((response) => {
             message.channel.send(response);
         });
     }else if (message.channel.type === "dm" && !message.author.bot) {
