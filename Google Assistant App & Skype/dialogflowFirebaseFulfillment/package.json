@@ -1,10 +1,10 @@
 {
-  "name": "dialogflowFirebaseFulfillment",
-  "description": "This is the default fulfillment for a Dialogflow agents using Cloud Functions for Firebase",
-  "version": "0.0.1",
+  "name": "CaterpillarFullfilment",
+  "description": "Ask The Wise Caterpillar is a harm reduction assistant",
+  "version": "1.4",
   "private": true,
   "license": "Apache Version 2.0",
-  "author": "Google Inc.",
+  "author": "Mikolaj Torz",
   "engines": {
     "node": "~6.0"
   },

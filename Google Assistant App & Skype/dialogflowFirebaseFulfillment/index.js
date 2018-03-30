@@ -47,12 +47,23 @@ function processRequest (request, response) {
         },
         'input.unknown': () => {
             apiHandler(userQuery).then((response) => {
-
-                if (response.includes("ask")) {
-                    app.ask(response);
+                if (response.includes("I could tell you want info about ")) {
+                    let drug = response.split(" ")[7].replace(/,\s*$/, "");
+                    app.ask(app.buildRichResponse()
+                .addSimpleResponse(response)
+                .addSuggestions('info about ' + drug)
+                .addSuggestions('dosing ' + drug)
+                .addSuggestions('effects of ' + drug)
+                .addSuggestions('is ' + drug + ' safe')
+                .addSuggestions('how to test ' + drug)
+                .addSuggestions('is ' + drug + ' toxic')
+                .addSuggestions(drug + ' tolerance')
+            );
                 }else if (response.includes("Sorry, but I couldn't determine what substance you were inquiring about")
                     || response.includes("Sorry, I know you want to know about mixing something with")) {
                     app.ask(response + " Please ask again or say quit.")
+                }else if (response.includes("ask")) {
+         		   app.ask(response);
                 }else if (userQuery.trim() === '') {
                     app.ask("Sorry, I didn't catch anything. Please ask a question or say quit.")
                 }else{
